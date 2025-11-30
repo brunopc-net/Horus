@@ -22,12 +22,16 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+        env:
+          BROWSERSLIST_IGNORE_OLD_DATA: true
 
       - name: Get weather data
         run: node src/backend/main.js --AQIUS_API_KEY=${{ secrets.AQIUS_API_KEY }} --WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }} --MY_PHONE_NUMBER=${{ secrets.MY_PHONE_NUMBER }} --TWILLIO_ACCOUNT_SID=${{ secrets.TWILLIO_ACCOUNT_SID }} --TWILLIO_AUTH_TOKEN=${{ secrets.TWILLIO_AUTH_TOKEN }}
 
       - name: Build website
         run: yarn build
+        env:
+          BROWSERSLIST_IGNORE_OLD_DATA: true
 
       # Popular action to deploy to GitHub Pages:
       # Docs: https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-docusaurus
